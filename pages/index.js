@@ -9,8 +9,8 @@ export default function Home() {
       <Head>
         <title>Living with Chris</title>
         <link rel="icon" href="/favicon.ico" />
+        <Script strategy='beforeInteractive' src="https://www.paypal.com/sdk/js?client-id=AdmE03bjZ3MWYmIEk_3dlqeJ4xc6fCia1SCJBmn9RAz_STEgdTcuThpbO942ENSwJtTfzQ3bYVniDfNI&vault=true&intent=subscription" data-sdk-integration-source="button-factory"/>
       </Head>
-      <Script src="https://www.paypal.com/sdk/js?client-id=AdmE03bjZ3MWYmIEk_3dlqeJ4xc6fCia1SCJBmn9RAz_STEgdTcuThpbO942ENSwJtTfzQ3bYVniDfNI&vault=true&intent=subscription" data-sdk-integration-source="button-factory"/>
 
       <main>
         <Header title="Welcome to 10226 Stratford Ave" />
