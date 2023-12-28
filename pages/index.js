@@ -4,28 +4,7 @@ import { useEffect, useRef } from 'react'
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 export default function Home() {
-  const ref = useRef(null);
-  useEffect(() => {
-    if (ref.current) return;
-    paypal.Buttons({
-      style: {
-        shape: 'rect',
-        color: 'gold',
-        layout: 'vertical',
-        label: 'subscribe'
-      },
-      createSubscription: function (data, actions) {
-        return actions.subscription.create({
-          /* Creates the subscription */
-          plan_id: 'P-8A254628MV0166352MWGL2XQ'
-        });
-      },
-      onApprove: function (data, actions) {
-        alert(data.subscriptionID); // You can add optional success message for the subscriber here
-      }
-    }).render('#paypal-button-container-P-8A254628MV0166352MWGL2XQ');
-    ref.current = true;
-  }, [])
+  
   return (
     <div className="container">
       <Head>
@@ -50,5 +29,30 @@ export default function Home() {
 }
 
 function PayPal() {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current) return;
+    setTimeout(() => {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe'
+        },
+        createSubscription: function (data, actions) {
+          return actions.subscription.create({
+            /* Creates the subscription */
+            plan_id: 'P-8A254628MV0166352MWGL2XQ'
+          });
+        },
+        onApprove: function (data, actions) {
+          alert(data.subscriptionID); // You can add optional success message for the subscriber here
+        }
+      }).render('#paypal-button-container-P-8A254628MV0166352MWGL2XQ');
+    }, 500)
+    
+    ref.current = true;
+  }, [])
   return null
 }
