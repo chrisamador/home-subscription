@@ -1,9 +1,30 @@
 import Head from 'next/head'
 import Header from '@components/Header'
-import Footer from '@components/Footer'
-import Script from 'next/script'
+import { useEffect, useRef } from 'react'
 
 export default function Home() {
+  const ref = useRef(null);
+  useEffect(() => {
+    if(ref.current) return;
+    paypal.Buttons({
+      style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          /* Creates the subscription */
+          plan_id: 'P-8A254628MV0166352MWGL2XQ'
+        });
+      },
+      onApprove: function(data, actions) {
+        alert(data.subscriptionID); // You can add optional success message for the subscriber here
+      }
+  }).render('#paypal-button-container-P-8A254628MV0166352MWGL2XQ');
+  ref.current = true;
+  }, [])
   return (
     <div className="container">
       <Head>
@@ -18,27 +39,6 @@ export default function Home() {
           Never miss a rent payment again. Subscribe below
         </p>
         <div id="paypal-button-container-P-8A254628MV0166352MWGL2XQ"></div>
-        <script dangerouslySetInnerHTML={{__html: `
-        paypal.Buttons({
-          style: {
-              shape: 'rect',
-              color: 'gold',
-              layout: 'vertical',
-              label: 'subscribe'
-          },
-          createSubscription: function(data, actions) {
-            return actions.subscription.create({
-              /* Creates the subscription */
-              plan_id: 'P-8A254628MV0166352MWGL2XQ'
-            });
-          },
-          onApprove: function(data, actions) {
-            alert(data.subscriptionID); // You can add optional success message for the subscriber here
-          }
-      }).render('#paypal-button-container-P-8A254628MV0166352MWGL2XQ');
-        
-        `}}></script>
-
       </main>
 
     </div>
